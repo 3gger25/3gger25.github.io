@@ -1,223 +1,580 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>STASH LOG</title>
-</head>
-<body>
-    <h1>The Stash</h1>
-    
-<h10>3gger25</h10>
-    
-<p>"To confuse the code, you must first confuse yourself"-3gger25</hp>
-    
-<p>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
-   
-    <h4>DEVLOG 1.1, MERGE LOG.</h4>
-    
-    <h5>FINISHED:</h5>
-    
-    <p>coded-by-me branch</p>
-    <p>Merged main and coded-by-me branches together</p>
-    
-    <h13>MODIFICATIONS:</h13>
-    
-    <p>Modified DEVLOG</p>
-    
-    <h2>WIP:</h2>
-    
-    <p>Game.html</p>
-    <p>Video Folder</p>
-    <p>Recoloring the website</p>
-    
-    <h12>FAILS:</h12>
-    
-    <p>Failed to complete game.html</p>
-    <p>Failed to recolor the website</p>
-    
-    <h14>SUCCESSES:</h14>
-    
-    <p>Successfully merged the branches together</p>
-    <p>Successfully created coded-by-me branch</p>
-    
-    <h3>END OF DEVLOG 1.1, MERGE LOG.</h3>
-    
-    <h6>3gger25 OUT</h6>
-    
-    <p>-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
-   
-    <h7>IMPORTANT INFORMATION:</h7>
-    
-    <p>Please note I am a student and will prioritize assignments over finding new games</p>
-    <p>However The page will be updated constantly and will have new games made by me or not made by me aswell as funny videos sometimes</p>
-    <p>I will take requests and if it fails it will be in the next devlog</p>
-    <p>I am very inexperienced with code and this is my introduction to it please do not make fun of or mock my work</p>
-    <p>I WOULD LOVE TO HEAR FEEDBACK ON HOW I COULD IMPROVE</p>
-    
-    <p>-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
-    
-    <h8>CREDITS:</h8>
-    
-    <p>brinleyww:NSWS</p>
-    
-    <p>paranoidhawk:Lookouts</p>
-    
-    <p>Yinnotayl:polytrack modded</p>
-    
-    <p>Krillion dev team:Krillion</p>
-    
-    <p>Wild Hunt dev team:Wild Hunt</p>
-    
-    <p>Tuffclient dev team:Tuffclient</p>
-    
-    <p>airy-one-1:fnf</p>
-    
-    <p>3gger25:README.md</p>
-    
-    <p>3gger25:web.html</p>
-    
-    <p>3gger25:1st.py</p>
-    
-    <p>3gger25:test.py</p>
-    
-    <p>3gger25:Game 1</p>
-    
-    <p>3gger25:Games folder</p>
-    
-    <p>3gger25:Mine! folder</p>
-    
-    <p>HUGE SHOUTOUT TOO Mr. Smith AND MY DAD FOR HELPING AND ENCOURAGING ME DO THIS AND LEARN CODE I SERIOUSLY COULDNT HAVE DONT THIS WITHOUT YOU TWO</p>
-    
-    <p>-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</p>
-    
-    <h11>MY REPOSITORY:</h11>
-    
-    <h9> <a href="https://github.com/3gger25/Game-stash/tree/main/Games">https://github.com/3gger25/Game-stash/tree/main/Games</a> </h9>
-</body>
-    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form</title>
+    <meta name="theme-color" content="#f3f0e7">
+    <title>The Stash | 3gger25</title>
     <style>
         :root {
-            --primary-color: #4a90e2;
-            --background-color: #f5f7fa;
-            --text-color: #333333;
-            --card-background: #ffffff;
-            --border-color: #cccccc;
+            color-scheme: light;
+            --paper: #f3f0e7;
+            --surface: #fffdf7;
+            --ink: #202927;
+            --muted: #59635e;
+            --green: #165c50;
+            --green-dark: #10483f;
+            --coral: #e56c4b;
+            --yellow: #e7bd53;
+            --line: #d7d4c9;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
+            background-color: var(--paper);
+            background-image: radial-gradient(#d5d0c3 0.7px, transparent 0.7px);
+            background-size: 14px 14px;
+            color: var(--ink);
+            font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+            line-height: 1.65;
         }
 
-        .feedback-card {
-            background: var(--card-background);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+        a {
+            color: inherit;
+        }
+
+        .site-header,
+        main,
+        .site-footer {
+            width: min(1080px, calc(100% - 40px));
+            margin-inline: auto;
+        }
+
+        .site-header {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .brand {
+            color: var(--green-dark);
+            font-size: 0.95rem;
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        nav a {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        nav a:hover,
+        nav a:focus-visible {
+            color: var(--coral);
+        }
+
+        .hero {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
+            align-items: center;
+            gap: 48px;
+            overflow: hidden;
+            margin-top: 32px;
+            padding: clamp(32px, 7vw, 76px);
+            border-radius: 6px;
+            background-color: var(--green);
+            background-image: linear-gradient(135deg, transparent 72%, rgba(255, 255, 255, 0.06) 72%);
+            color: #fffdf7;
+        }
+
+        .eyebrow,
+        .section-kicker {
+            margin: 0 0 12px;
+            color: var(--yellow);
+            font-size: 0.76rem;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            line-height: 1.1;
+        }
+
+        h1 {
+            margin-bottom: 14px;
+            font-size: clamp(3.2rem, 8vw, 6.4rem);
+            font-weight: 700;
+        }
+
+        h1 span {
+            color: var(--yellow);
+        }
+
+        .hero-copy {
+            max-width: 470px;
+            margin-bottom: 26px;
+            color: #e5eee8;
+            font-size: 1.08rem;
+        }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px 20px;
+            font-size: 0.92rem;
+        }
+
+        .hero-links a {
+            color: #fffdf7;
+            font-weight: 800;
+            text-underline-offset: 4px;
+        }
+
+        .hero-links a:hover {
+            color: var(--yellow);
+        }
+
+        .hero-note {
+            padding: 24px;
+            border: 1px solid rgba(255, 253, 247, 0.35);
+            border-radius: 4px;
+            background: rgba(10, 48, 41, 0.22);
+        }
+
+        .hero-note strong {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--yellow);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .hero-note blockquote {
+            margin: 0;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1.3rem;
+            line-height: 1.45;
+        }
+
+        .hero-note cite {
+            display: block;
+            margin-top: 14px;
+            color: #e5eee8;
+            font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+            font-size: 0.85rem;
+            font-style: normal;
+        }
+
+        .content-section {
+            padding-block: 68px;
+            border-bottom: 1px solid var(--line);
+            scroll-margin-top: 20px;
+        }
+
+        .section-heading {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            justify-content: space-between;
+            gap: 12px 24px;
+            margin-bottom: 26px;
+        }
+
+        .section-kicker {
+            margin-bottom: 8px;
+            color: var(--coral);
         }
 
         h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #222;
+            margin-bottom: 0;
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        .log-version {
+            margin: 0;
+            padding: 5px 10px;
+            border: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .status-block {
+            padding: 22px 24px;
+            border: 1px solid var(--line);
+            border-top: 4px solid var(--green);
+            border-radius: 4px;
+            background: var(--surface);
+        }
+
+        .status-block:nth-child(2) {
+            border-top-color: var(--yellow);
+        }
+
+        .status-block:nth-child(3) {
+            border-top-color: var(--coral);
+        }
+
+        .status-block:nth-child(4) {
+            border-top-color: #537f9a;
+        }
+
+        .status-block h3 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .status-block ul,
+        .credits-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .status-block li {
+            padding-block: 5px;
+            color: var(--muted);
+        }
+
+        .status-block li + li {
+            border-top: 1px solid #e8e5dc;
+        }
+
+        .signoff {
+            margin: 22px 0 0;
+            color: var(--green-dark);
+            font-weight: 900;
+        }
+
+        .about-copy {
+            max-width: 760px;
+            color: var(--muted);
+            font-size: 1.02rem;
+        }
+
+        .about-copy p:last-child {
+            margin-bottom: 0;
+            color: var(--green-dark);
+            font-weight: 900;
+        }
+
+        .credits-list {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0 32px;
+        }
+
+        .credits-list li {
+            padding: 11px 0;
+            border-bottom: 1px solid var(--line);
+            color: var(--muted);
+        }
+
+        .credits-list strong {
+            color: var(--ink);
+        }
+
+        .shoutout {
+            grid-column: 1 / -1;
+            margin-top: 20px;
+            padding: 20px 24px;
+            border-left: 4px solid var(--coral);
+            background: #f9e6d9;
+            color: var(--ink) !important;
+            font-weight: 700;
+        }
+
+        .repository-link {
+            display: inline-block;
+            margin-top: 4px;
+            color: var(--green-dark);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+            text-underline-offset: 4px;
+        }
+
+        .feedback-section {
+            padding-block: 68px;
+            scroll-margin-top: 20px;
+        }
+
+        .feedback-section > p {
+            max-width: 560px;
+            margin-block: 12px 24px;
+            color: var(--muted);
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+            max-width: 760px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            display: grid;
+            gap: 7px;
+        }
+
+        .form-group.message-group {
+            grid-column: 1 / -1;
         }
 
         label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
             font-size: 0.9rem;
+            font-weight: 800;
         }
 
-        input[type="text"],
-        input[type="email"],
+        input,
         textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
+            border: 1px solid #bcbfb4;
+            border-radius: 3px;
+            padding: 11px 12px;
+            background: var(--surface);
+            color: var(--ink);
+            font: inherit;
         }
 
         input:focus,
         textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
+            outline: 3px solid rgba(22, 92, 80, 0.2);
+            border-color: var(--green);
         }
 
         textarea {
+            min-height: 130px;
             resize: vertical;
-            min-height: 120px;
         }
 
         button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 4px;
+            grid-column: 1 / -1;
+            justify-self: start;
+            padding: 12px 18px;
+            border: 0;
+            border-radius: 3px;
+            background: var(--coral);
+            color: #201e1a;
+            font: inherit;
+            font-weight: 900;
             cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s;
         }
 
-        button:hover {
-            background-color: #357abd;
+        button:hover,
+        button:focus-visible {
+            background: var(--yellow);
+        }
+
+        .site-footer {
+            padding-block: 20px 32px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .site-footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 680px) {
+            .site-header {
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+                gap: 8px;
+                padding-block: 16px;
+            }
+
+            nav {
+                gap: 8px 16px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+
+            .status-grid,
+            .credits-list,
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .shoutout,
+            .form-group.message-group,
+            button {
+                grid-column: auto;
+            }
+
+            .content-section,
+            .feedback-section {
+                padding-block: 48px;
+            }
         }
     </style>
 </head>
 <body>
+    <header class="site-header">
+        <a class="brand" href="#top">3GGER25 / THE STASH</a>
+        <nav aria-label="Main navigation">
+            <a href="#devlog">Devlog</a>
+            <a href="#about">About</a>
+            <a href="#credits">Credits</a>
+            <a href="#feedback">Feedback</a>
+        </nav>
+    </header>
 
-    <div class="feedback-card">
-        <h2>Submit Your Feedback</h2>
-        <form action="https://formspree.io" method="POST">
-            
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
+    <main id="top">
+        <section class="hero" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">Personal game archive · Devlog 1.1</p>
+                <h1 id="page-title">The Stash<span>.</span></h1>
+                <p class="hero-copy">Games, experiments, and the notes from making a little corner of the internet.</p>
+                <div class="hero-links">
+                    <span>Made by 3gger25</span>
+                    <a href="https://github.com/3gger25/Game-stash/tree/main/Games">Browse the games repository <span aria-hidden="true">&rarr;</span></a>
+                </div>
+            </div>
+            <aside class="hero-note" aria-label="A note from the creator">
+                <strong>A thought from the log</strong>
+                <blockquote>“To confuse the code, you must first confuse yourself.”</blockquote>
+                <cite>— 3gger25</cite>
+            </aside>
+        </section>
+
+        <section class="content-section" id="devlog" aria-labelledby="devlog-title">
+            <div class="section-heading">
+                <div>
+                    <p class="section-kicker">The latest update</p>
+                    <h2 id="devlog-title">Merge log</h2>
+                </div>
+                <p class="log-version">DEVLOG 1.1</p>
             </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="_replyto" placeholder="your.email@example.com" required>
+            <div class="status-grid">
+                <article class="status-block">
+                    <h3>Finished</h3>
+                    <ul>
+                        <li>coded-by-me branch</li>
+                        <li>Merged main and coded-by-me branches together</li>
+                    </ul>
+                </article>
+                <article class="status-block">
+                    <h3>Modifications</h3>
+                    <ul>
+                        <li>Modified DEVLOG</li>
+                    </ul>
+                </article>
+                <article class="status-block">
+                    <h3>Work in progress</h3>
+                    <ul>
+                        <li>Game.html</li>
+                        <li>Video Folder</li>
+                        <li>Recoloring the website</li>
+                    </ul>
+                </article>
+                <article class="status-block">
+                    <h3>Fails</h3>
+                    <ul>
+                        <li>Failed to complete game.html</li>
+                        <li>Failed to recolor the website</li>
+                    </ul>
+                </article>
+                <article class="status-block">
+                    <h3>Successes</h3>
+                    <ul>
+                        <li>Successfully merged the branches together</li>
+                        <li>Successfully created coded-by-me branch</li>
+                    </ul>
+                </article>
             </div>
+            <p class="signoff">End of devlog 1.1. 3gger25 out.</p>
+        </section>
 
-            <div class="form-group">
-                <label for="message">Your Feedback</label>
-                <textarea id="message" name="message" placeholder="How can I improve?" required></textarea>
+        <section class="content-section" id="about" aria-labelledby="about-title">
+            <p class="section-kicker">A note from the creator</p>
+            <h2 id="about-title">Important information</h2>
+            <div class="about-copy">
+                <p>Please note I am a student and will prioritize assignments over finding new games. However, the page will be updated constantly and will have new games made by me or not made by me, as well as funny videos sometimes.</p>
+                <p>I will take requests and if it fails it will be in the next devlog.</p>
+                <p>I am very inexperienced with code and this is my introduction to it. Please do not make fun of or mock my work.</p>
+                <p>I would love to hear feedback on how I could improve.</p>
             </div>
+        </section>
 
-            <!-- Anti-spam honeypot field (hidden from users) -->
-            <input type="text" name="_gotcha" style="display:none">
+        <section class="content-section" id="credits" aria-labelledby="credits-title">
+            <p class="section-kicker">Made possible by</p>
+            <h2 id="credits-title">Credits</h2>
+            <ul class="credits-list">
+                <li><strong>brinleyww:</strong> NSWS</li>
+                <li><strong>paranoidhawk:</strong> Lookouts</li>
+                <li><strong>Yinnotayl:</strong> polytrack modded</li>
+                <li><strong>Krillion dev team:</strong> Krillion</li>
+                <li><strong>Wild Hunt dev team:</strong> Wild Hunt</li>
+                <li><strong>Tuffclient dev team:</strong> Tuffclient</li>
+                <li><strong>airy-one-1:</strong> fnf</li>
+                <li><strong>3gger25:</strong> README.md</li>
+                <li><strong>3gger25:</strong> web.html</li>
+                <li><strong>3gger25:</strong> 1st.py</li>
+                <li><strong>3gger25:</strong> test.py</li>
+                <li><strong>3gger25:</strong> Game 1</li>
+                <li><strong>3gger25:</strong> Games folder</li>
+                <li><strong>3gger25:</strong> Mine! folder</li>
+                <li class="shoutout">Huge shoutout to Mr. Smith and my dad for helping and encouraging me to do this and learn code. I seriously couldn't have done this without you two.</li>
+            </ul>
+        </section>
 
-            <button type="submit">Submit Feedback</button>
-        </form>
-    </div>
+        <section class="feedback-section" id="feedback" aria-labelledby="feedback-title">
+            <p class="section-kicker">Help the stash grow</p>
+            <h2 id="feedback-title">Send feedback</h2>
+            <p>Have a suggestion or a game request? Leave a note.</p>
+            <form action="https://formspree.io" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="_replyto" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group message-group">
+                    <label for="message">Your feedback</label>
+                    <textarea id="message" name="message" placeholder="What should I check out or improve?" required></textarea>
+                </div>
+                <input type="text" name="_gotcha" hidden tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button type="submit">Submit feedback <span aria-hidden="true">&rarr;</span></button>
+            </form>
+        </section>
+    </main>
 
+    <footer class="site-footer">
+        <p>3gger25 · The Stash</p>
+    </footer>
 </body>
-</html>
-
 </html>

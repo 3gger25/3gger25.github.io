@@ -18,11 +18,6 @@
             --yellow: #e7bd53;
             --line: #d7d4c9;
         }
-.site-header nav a.water-btn:hover,
-.site-header nav a.water-btn:hover,
-.site-header nav a.water-btn:focus-visible {
-    color: var(--green-dark)";
-}
         * {
             box-sizing: border-box;
         }
@@ -84,6 +79,19 @@
         nav a:hover,
         nav a:focus-visible {
             color: var(--coral);
+        }
+
+        .site-header nav a.water-btn {
+            color: var(--green-dark);
+        }
+
+        .site-header nav a.water-btn .liquid {
+            background: var(--green-dark);
+        }
+
+        .site-header nav a.water-btn:hover,
+        .site-header nav a.water-btn:focus-visible {
+            color: #fffdf7;
         }
 
         .hero {
@@ -513,8 +521,6 @@
 <body>
     <header class="site-header">
         <a class="brand" href="#top">3GGER25 / THE STASH</a>
-        
-}
         <nav aria-label="Main navigation">
     <a href="#devlog" class="water-btn">
         <span>Devlog</span>

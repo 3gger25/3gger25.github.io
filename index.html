@@ -316,7 +316,57 @@
         .credits-list strong {
             color: var(--ink);
         }
+        .water-btn-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
 
+.water-btn {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    isolation: isolate;
+    padding: 10px 16px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    color: #fffdf7;
+    text-decoration: none;
+}
+
+.water-btn > span {
+    position: relative;
+    z-index: 1;
+}
+
+.water-btn .liquid {
+    position: absolute;
+    z-index: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    border-radius: 50% 50% 0 0 / 18% 18% 0 0;
+    background: var(--coral);
+    transition: height 0.35s ease;
+}
+
+.water-btn:hover .liquid,
+.water-btn:focus-visible .liquid {
+    height: 140%;
+}
+
+.water-btn:focus-visible {
+    outline: 3px solid var(--yellow);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .water-btn .liquid {
+        transition: none;
+    }
+}
         .shoutout {
             grid-column: 1 / -1;
             margin-top: 20px;

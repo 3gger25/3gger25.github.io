@@ -343,7 +343,7 @@
     padding: 10px 16px;
     border: 1px solid currentColor;
     border-radius: 4px;
-    color: #537f9a;
+    color: var(--yellow);
     text-decoration: none;
 }
 
@@ -368,6 +368,24 @@
 .water-btn:hover .liquid,
 .water-btn:focus-visible .liquid {
     height: 140%;
+}
+
+.hero .repository-water-btn .liquid {
+    background: var(--blue);
+}
+
+.hero .code-water-btn .liquid {
+    background: var(--yellow);
+}
+
+.hero .repository-water-btn:hover,
+.hero .repository-water-btn:focus-visible {
+    color: #fffdf7;
+}
+
+.hero .code-water-btn:hover,
+.hero .code-water-btn:focus-visible {
+    color: var(--ink);
 }
 
 .water-btn:focus-visible {
@@ -561,12 +579,12 @@
                 <p class="hero-copy">Hope nothing broke... cuz i aint gonna fix it</p>
                 <div class="water-btn-links">
                     <span>Made by 3gger25</span>
-                    <a href="https://github.com/3gger25/Game-stash/tree/main/Games" class="water-btn">
+                    <a href="https://github.com/3gger25/Game-stash/tree/main/Games" class="water-btn repository-water-btn">
                     <span>MY REOPSITORY</span>
                     <div class="liquid"></div>
                     </a>
 
-                    <a href="https://github.com/3gger25/3gger25.github.io/blob/main/index.html" class="water-btn">
+                    <a href="https://github.com/3gger25/3gger25.github.io/blob/main/index.html" class="water-btn code-water-btn">
                     <span>MY CODE</span>
                     <div class="liquid"></div>
                     </a>

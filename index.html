@@ -14,6 +14,7 @@
             --muted: #59635e;
             --green: #165c50;
             --green-dark: #10483f;
+            --blue: #315f7b;
             --coral: #e56c4b;
             --yellow: #e7bd53;
             --line: #d7d4c9;
@@ -468,6 +469,17 @@
         button:hover,
         button:focus-visible {
             background: var(--yellow);
+        }
+
+        form button.water-btn:hover,
+        form button.water-btn:focus-visible {
+            background: var(--blue);
+            color: #fffdf7;
+        }
+
+        form button.water-btn:hover .liquid,
+        form button.water-btn:focus-visible .liquid {
+            background: var(--blue);
         }
 
         .site-footer {

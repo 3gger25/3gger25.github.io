@@ -18,7 +18,11 @@
             --yellow: #e7bd53;
             --line: #d7d4c9;
         }
-
+.site-header nav a.water-btn:hover,
+.site-header nav a.water-btn:hover,
+.site-header nav a.water-btn:focus-visible {
+    color: var(--green-dark)";
+}
         * {
             box-sizing: border-box;
         }
@@ -509,12 +513,26 @@
 <body>
     <header class="site-header">
         <a class="brand" href="#top">3GGER25 / THE STASH</a>
+        
+}
         <nav aria-label="Main navigation">
-            <a href="#devlog">Devlog</a>
-            <a href="#about">About</a>
-            <a href="#credits">Credits</a>
-            <a href="#feedback">Feedback</a>
-        </nav>
+    <a href="#devlog" class="water-btn">
+        <span>Devlog</span>
+        <div class="liquid"></div>
+    </a>
+    <a href="#about" class="water-btn">
+        <span>About</span>
+        <div class="liquid"></div>
+    </a>
+    <a href="#credits" class="water-btn">
+        <span>Credits</span>
+        <div class="liquid"></div>
+    </a>
+    <a href="#feedback" class="water-btn">
+        <span>Feedback</span>
+        <div class="liquid"></div>
+    </a>
+</nav>
     </header>
 
     <main id="top">
@@ -700,7 +718,7 @@
                     <textarea id="message" name="message" placeholder="WRITE" required></textarea>
                 </div>
                 <input type="text" name="_gotcha" hidden tabindex="-1" autocomplete="off" aria-hidden="true">
-                <button type="submit">Submit feedback <span aria-hidden="true">&rarr;</span></button>
+                <button class="water-btn" type="submit">Submit feedback<span aria-hidden="true">&rarr;</span><div class="liquid"></div></button>
             </form>
         </section>
     </main>

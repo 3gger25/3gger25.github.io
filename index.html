@@ -348,16 +348,17 @@
 
 .water-btn > span {
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .water-btn .liquid {
     position: absolute;
-    z-index: 0;
+    z-index: 1;
     right: 0;
     bottom: 0;
     left: 0;
     height: 0;
+    pointer-events: none;
     border-radius: 50% 50% 0 0 / 18% 18% 0 0;
     background: var(--coral);
     transition: height 0.35s ease;

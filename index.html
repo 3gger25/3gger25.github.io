@@ -257,41 +257,98 @@
         }
 
         .status-block {
+            --entry-accent: var(--green);
+            position: relative;
             padding: 22px 24px;
             border: 1px solid var(--line);
-            border-top: 4px solid var(--green);
+            border-top: 4px solid var(--entry-accent);
             border-radius: 4px;
             background: var(--surface);
         }
 
+        .status-block::before {
+            position: absolute;
+            top: 0;
+            left: 24px;
+            width: 12px;
+            height: 9px;
+            border-radius: 0 0 50% 50%;
+            background: var(--entry-accent);
+            content: "";
+            pointer-events: none;
+            transform: translateY(var(--drip-offset, 0px))
+                scaleX(var(--drip-width, 1))
+                scaleY(var(--drip-stretch, 1));
+            transform-origin: top center;
+            transition: transform 180ms ease-out;
+        }
+
+        .status-block::after {
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--entry-accent);
+            content: "";
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .status-block.splashing::after {
+            animation: drip-splash 450ms ease-out;
+        }
+
+        @keyframes drip-splash {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+
+            20% {
+                opacity: 1;
+                box-shadow: -12px -5px 0 -1px var(--entry-accent),
+                    12px -5px 0 -1px var(--entry-accent);
+                transform: translateY(-2px) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                box-shadow: -12px -5px 0 -1px var(--entry-accent),
+                    12px -5px 0 -1px var(--entry-accent);
+                transform: translateY(-12px) scale(0.4);
+            }
+        }
+
         .status-block:nth-child(2) {
-            border-top-color: var(--yellow);
+            --entry-accent: var(--yellow);
         }
 
         .status-block:nth-child(3) {
-            border-top-color: var(--coral);
+            --entry-accent: var(--coral);
         }
 
         .status-block:nth-child(4) {
-            border-top-color: #537f9a;
+            --entry-accent: #537f9a;
         }
        .status-block:nth-child(5) {
-           border-top-color: var(--green-dark);
+           --entry-accent: var(--green-dark);
        }
         .status-block:nth-child(6) {
-            border-top-color: var(--yellow);
+            --entry-accent: var(--yellow);
         }
         .status-block:nth-child(7) {
-            border-top-color: var(--coral);
+            --entry-accent: var(--coral);
         }
         .status-block:nth-child(8) {
-            border-top-color: #537f9a;
+            --entry-accent: #537f9a;
         }
         .status-block:nth-child(9) {
-            border-top-color: var(--yellow);
+            --entry-accent: var(--yellow);
         }
         .status-block:nth-child(10) {
-            border-top-color: var(--coral);
+            --entry-accent: var(--coral);
         }
         .status-block h3 {
             margin-bottom: 12px;
@@ -417,6 +474,13 @@
         transition: none;
     }
 
+    .status-block::before {
+        transition: none;
+    }
+
+    .status-block.splashing::after {
+        animation: none;
+    }
 }
         .shoutout {
             grid-column: 1 / -1;
@@ -792,5 +856,78 @@
         <p>3gger25 · THE STASH</p>
         <p>Im not finna lie to you i prob broke sum up in here</p>
     </footer>
+    <script>
+        const devlog = document.querySelector("#devlog");
+        const dripEntries = document.querySelectorAll(".status-block");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        if (devlog && dripEntries.length && !reduceMotion.matches) {
+            let lastScrollY = window.scrollY;
+            let scrollVelocity = 0;
+            let animationFrame = 0;
+            const splashArmed = new WeakSet(dripEntries);
+
+            dripEntries.forEach((entry) => {
+                entry.addEventListener("animationend", (event) => {
+                    if (event.animationName === "drip-splash") {
+                        entry.classList.remove("splashing");
+                    }
+                });
+            });
+
+            function resetDrips() {
+                dripEntries.forEach((entry) => {
+                    entry.style.removeProperty("--drip-offset");
+                    entry.style.removeProperty("--drip-stretch");
+                    entry.style.removeProperty("--drip-width");
+                    entry.classList.remove("splashing");
+                    splashArmed.add(entry);
+                });
+            }
+
+            function animateDrips() {
+                const currentScrollY = window.scrollY;
+                const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+                lastScrollY = currentScrollY;
+                scrollVelocity = Math.max(scrollDelta, scrollVelocity * 0.82);
+
+                const sectionBounds = devlog.getBoundingClientRect();
+                if (sectionBounds.bottom < 0 || sectionBounds.top > window.innerHeight) {
+                    resetDrips();
+                    scrollVelocity = 0;
+                    animationFrame = 0;
+                    return;
+                }
+
+                const intensity = Math.min(scrollVelocity / 20, 1);
+                dripEntries.forEach((entry, index) => {
+                    const entryIntensity = Math.max(0, intensity - index * 0.08);
+                    entry.style.setProperty("--drip-offset", `${entryIntensity * 10}px`);
+                    entry.style.setProperty("--drip-stretch", `${1 + entryIntensity * 3.5}`);
+                    entry.style.setProperty("--drip-width", `${1 - entryIntensity * 0.18}`);
+
+                    if (entryIntensity > 0.85 && splashArmed.has(entry)) {
+                        entry.classList.add("splashing");
+                        splashArmed.delete(entry);
+                    } else if (entryIntensity < 0.35) {
+                        splashArmed.add(entry);
+                    }
+                });
+
+                if (scrollVelocity > 0.15) {
+                    animationFrame = window.requestAnimationFrame(animateDrips);
+                } else {
+                    resetDrips();
+                    animationFrame = 0;
+                }
+            }
+
+            window.addEventListener("scroll", () => {
+                if (!animationFrame) {
+                    animationFrame = window.requestAnimationFrame(animateDrips);
+                }
+            }, { passive: true });
+        }
+    </script>
 </body>
 </html>

@@ -33,10 +33,11 @@
             z-index: 9999;
             inset: 12px;
             border: 12px solid transparent;
-            border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0 10 Q7.5 0 15 10 T30 10 T45 10 T60 10 M0 50 Q7.5 40 15 50 T30 50 T45 50 T60 50 M10 0 Q0 7.5 10 15 T10 30 T10 45 T10 60 M50 0 Q40 7.5 50 15 T50 30 T50 45 T50 60' fill='none' stroke='%23e56c4b' stroke-width='4'/%3E%3C/svg%3E");
+            border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0 10 Q7.5 0 15 10 T30 10 T45 10 T60 10 M0 50 Q7.5 40 15 50 T30 50 T45 50 T60 50 M10 0 Q0 7.5 10 15 T10 30 T10 45 T10 60 M50 0 Q40 7.5 50 15 T50 30 T50 45 T50 60' fill='none' stroke='%23e56c4b' stroke-width='6'/%3E%3C/svg%3E");
             border-image-slice: 20;
             border-image-width: 12px;
             border-image-repeat: round;
+            filter: url("#gooey-frame");
             content: "";
             pointer-events: none;
         }
@@ -275,9 +276,49 @@
             background: var(--entry-accent);
             content: "";
             pointer-events: none;
-            transform: translateY(var(--drip-offset, 0px)) scaleY(var(--drip-stretch, 1));
+            transform: translateY(var(--drip-offset, 0px))
+                scaleX(var(--drip-width, 1))
+                scaleY(var(--drip-stretch, 1));
             transform-origin: top center;
             transition: transform 180ms ease-out;
+        }
+
+        .status-block::after {
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--entry-accent);
+            content: "";
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .status-block.splashing::after {
+            animation: drip-splash 450ms ease-out;
+        }
+
+        @keyframes drip-splash {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+
+            20% {
+                opacity: 1;
+                box-shadow: -12px -5px 0 -1px var(--entry-accent),
+                    12px -5px 0 -1px var(--entry-accent);
+                transform: translateY(-2px) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                box-shadow: -12px -5px 0 -1px var(--entry-accent),
+                    12px -5px 0 -1px var(--entry-accent);
+                transform: translateY(-12px) scale(0.4);
+            }
         }
 
         .status-block:nth-child(2) {
@@ -436,6 +477,10 @@
     .status-block::before {
         transition: none;
     }
+
+    .status-block.splashing::after {
+        animation: none;
+    }
 }
         .shoutout {
             grid-column: 1 / -1;
@@ -588,6 +633,15 @@
     </style>
 </head>
 <body>
+    <svg aria-hidden="true" width="0" height="0" style="position: absolute">
+        <filter id="gooey-frame" x="-5%" y="-5%" width="110%" height="110%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="soft-edge" />
+            <feColorMatrix
+                in="soft-edge"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+            />
+        </filter>
+    </svg>
     <header class="site-header">
         <a class="brand" href="#top">3GGER25 / THE STASH</a>
         <nav aria-label="Main navigation">
@@ -811,11 +865,23 @@
             let lastScrollY = window.scrollY;
             let scrollVelocity = 0;
             let animationFrame = 0;
+            const splashArmed = new WeakSet(dripEntries);
+
+            dripEntries.forEach((entry) => {
+                entry.addEventListener("animationend", (event) => {
+                    if (event.animationName === "drip-splash") {
+                        entry.classList.remove("splashing");
+                    }
+                });
+            });
 
             function resetDrips() {
                 dripEntries.forEach((entry) => {
                     entry.style.removeProperty("--drip-offset");
                     entry.style.removeProperty("--drip-stretch");
+                    entry.style.removeProperty("--drip-width");
+                    entry.classList.remove("splashing");
+                    splashArmed.add(entry);
                 });
             }
 
@@ -834,9 +900,18 @@
                 }
 
                 const intensity = Math.min(scrollVelocity / 20, 1);
-                dripEntries.forEach((entry) => {
-                    entry.style.setProperty("--drip-offset", `${intensity * 5}px`);
-                    entry.style.setProperty("--drip-stretch", `${1 + intensity * 1.8}`);
+                dripEntries.forEach((entry, index) => {
+                    const entryIntensity = Math.max(0, intensity - index * 0.08);
+                    entry.style.setProperty("--drip-offset", `${entryIntensity * 10}px`);
+                    entry.style.setProperty("--drip-stretch", `${1 + entryIntensity * 3.5}`);
+                    entry.style.setProperty("--drip-width", `${1 - entryIntensity * 0.18}`);
+
+                    if (entryIntensity > 0.85 && splashArmed.has(entry)) {
+                        entry.classList.add("splashing");
+                        splashArmed.delete(entry);
+                    } else if (entryIntensity < 0.35) {
+                        splashArmed.add(entry);
+                    }
                 });
 
                 if (scrollVelocity > 0.15) {

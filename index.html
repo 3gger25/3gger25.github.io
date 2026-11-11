@@ -23,6 +23,24 @@
             box-sizing: border-box;
         }
 
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::after {
+            position: absolute;
+            z-index: 9999;
+            inset: 12px;
+            border: 12px solid transparent;
+            border-image-source: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M0 10 Q7.5 0 15 10 T30 10 T45 10 T60 10 M0 50 Q7.5 40 15 50 T30 50 T45 50 T60 50 M10 0 Q0 7.5 10 15 T10 30 T10 45 T10 60 M50 0 Q40 7.5 50 15 T50 30 T50 45 T50 60' fill='none' stroke='%23e56c4b' stroke-width='4'/%3E%3C/svg%3E");
+            border-image-slice: 20;
+            border-image-width: 12px;
+            border-image-repeat: round;
+            content: "";
+            pointer-events: none;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -238,41 +256,58 @@
         }
 
         .status-block {
+            --entry-accent: var(--green);
+            position: relative;
             padding: 22px 24px;
             border: 1px solid var(--line);
-            border-top: 4px solid var(--green);
+            border-top: 4px solid var(--entry-accent);
             border-radius: 4px;
             background: var(--surface);
         }
 
+        .status-block::before {
+            position: absolute;
+            top: 0;
+            left: 24px;
+            width: 12px;
+            height: 9px;
+            border-radius: 0 0 50% 50%;
+            background: var(--entry-accent);
+            content: "";
+            pointer-events: none;
+            transform: translateY(var(--drip-offset, 0px)) scaleY(var(--drip-stretch, 1));
+            transform-origin: top center;
+            transition: transform 180ms ease-out;
+        }
+
         .status-block:nth-child(2) {
-            border-top-color: var(--yellow);
+            --entry-accent: var(--yellow);
         }
 
         .status-block:nth-child(3) {
-            border-top-color: var(--coral);
+            --entry-accent: var(--coral);
         }
 
         .status-block:nth-child(4) {
-            border-top-color: #537f9a;
+            --entry-accent: #537f9a;
         }
-.status-block:nth-child(5) {
-    border-top-color: var(--green-dark);
-}
+       .status-block:nth-child(5) {
+           --entry-accent: var(--green-dark);
+       }
         .status-block:nth-child(6) {
-            border-top-color: var(--yellow);
+            --entry-accent: var(--yellow);
         }
         .status-block:nth-child(7) {
-            border-top-color: var(--coral);
+            --entry-accent: var(--coral);
         }
         .status-block:nth-child(8) {
-            border-top-color: #537f9a;
+            --entry-accent: #537f9a;
         }
-            .status-block:nth-child(9) {
-                border-top-color: var(--yellow);
-            }
+        .status-block:nth-child(9) {
+            --entry-accent: var(--yellow);
+        }
         .status-block:nth-child(10) {
-            border-top-color: var(--coral);
+            --entry-accent: var(--coral);
         }
         .status-block h3 {
             margin-bottom: 12px;
@@ -395,6 +430,10 @@
 
 @media (prefers-reduced-motion: reduce) {
     .water-btn .liquid {
+        transition: none;
+    }
+
+    .status-block::before {
         transition: none;
     }
 }
@@ -763,5 +802,57 @@
         <p>3gger25 · THE STASH</p>
         <p>Im not finna lie to you i prob broke sum up in here</p>
     </footer>
+    <script>
+        const devlog = document.querySelector("#devlog");
+        const dripEntries = document.querySelectorAll(".status-block");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        if (devlog && dripEntries.length && !reduceMotion.matches) {
+            let lastScrollY = window.scrollY;
+            let scrollVelocity = 0;
+            let animationFrame = 0;
+
+            function resetDrips() {
+                dripEntries.forEach((entry) => {
+                    entry.style.removeProperty("--drip-offset");
+                    entry.style.removeProperty("--drip-stretch");
+                });
+            }
+
+            function animateDrips() {
+                const currentScrollY = window.scrollY;
+                const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+                lastScrollY = currentScrollY;
+                scrollVelocity = Math.max(scrollDelta, scrollVelocity * 0.82);
+
+                const sectionBounds = devlog.getBoundingClientRect();
+                if (sectionBounds.bottom < 0 || sectionBounds.top > window.innerHeight) {
+                    resetDrips();
+                    scrollVelocity = 0;
+                    animationFrame = 0;
+                    return;
+                }
+
+                const intensity = Math.min(scrollVelocity / 20, 1);
+                dripEntries.forEach((entry) => {
+                    entry.style.setProperty("--drip-offset", `${intensity * 5}px`);
+                    entry.style.setProperty("--drip-stretch", `${1 + intensity * 1.8}`);
+                });
+
+                if (scrollVelocity > 0.15) {
+                    animationFrame = window.requestAnimationFrame(animateDrips);
+                } else {
+                    resetDrips();
+                    animationFrame = 0;
+                }
+            }
+
+            window.addEventListener("scroll", () => {
+                if (!animationFrame) {
+                    animationFrame = window.requestAnimationFrame(animateDrips);
+                }
+            }, { passive: true });
+        }
+    </script>
 </body>
 </html>
